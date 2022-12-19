@@ -26,6 +26,6 @@
     return result;
 }
 
-Console.WriteLine("Поиск второго символа в числе");
+Console.WriteLine("Поиск третьего символа в числе");
 int number = getNumber("Введите трехзначное число");
 Console.WriteLine(number%10);
