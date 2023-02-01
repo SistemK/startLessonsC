@@ -44,7 +44,6 @@ int[,,] initMatrix (int x, int y, int z)
         {
             for (int k = 0; k < matrix.GetLength(2); k++)
             {
-               //matrix[,y,z] = 1; 
                matrix[i,j,k] = checkUniq(matrix);
             }
         }
@@ -67,7 +66,7 @@ void printArray(int[,,] matrix)
     }
 }
 
-Console.WriteLine("Нахождение строки массива с наименьшей суммой элементов");
+Console.WriteLine("Формирование трехмерного массива с уникальными элементами");
 Console.WriteLine();
 Console.WriteLine("Задайте размер массива");
 Console.WriteLine();
