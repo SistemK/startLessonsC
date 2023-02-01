@@ -1,13 +1,11 @@
 ﻿/*
-Задайте двумерный массив. Напишите программу, которая упорядочит по убыванию элементы каждой строки двумерного массива.
+Задача 56: Задайте прямоугольный двумерный массив. Напишите программу, которая будет находить строку с наименьшей суммой элементов.
 Например, задан массив:
 1 4 7 2
 5 9 2 3
 8 4 2 4
-В итоге получается вот такой массив:
-7 4 2 1
-9 5 3 2
-8 4 4 2
+5 2 6 7
+Программа считает сумму элементов в каждой строке и выдаёт номер строки с наименьшей суммой элементов: 1 строка
 */
 
 int getNumber(string message)
@@ -47,29 +45,39 @@ void printArray(int[,] arr)
         } 
     Console.WriteLine();      
     }
-
 }
 
-int[,] sortRow(int[,] arr)
+int minElementArray(int[] arr)
 {
+    int min = arr[0];
+    int numberRow = 0;
+    for (int i = 0; i < arr.Length; i++)
+    {
+        if (arr[i] <= min)
+        {  
+            numberRow = i+1;
+        }
+    }
+    return numberRow;
+}
+
+void minSumRow(int[,] arr)
+{
+    int[] sumArray = new int[arr.GetLength(0)];
     for (int i = 0; i < arr.GetLength(0); i++)
     {
+        int sumRow = 0;
         for (int j = 0; j < arr.GetLength(1); j++)
-        {
-            for (int k = 0; k < arr.GetLength(1) - j - 1; k++)
-            {
-                if (arr[i,k] > arr[i,k+1])
-                {
-                    int temp = arr[i,k]; 
-                    arr[i,k] = arr[i,k+1]; 
-                    arr[i,k+1] = temp;
-                }
-            }            
-        }      
+        {            
+            sumRow += arr[i,j];       
+        } 
+        sumArray[i] = sumRow;    
     }
-    return arr;
+    int minRow = minElementArray(sumArray);
+    Console.WriteLine($"Минимальная сумма элементов строки массива = {sumArray[minRow-1]}, cтрока номер {minRow}");
 }
-Console.WriteLine("Сортировка массива методом пузырька");
+
+Console.WriteLine("Нахождение строки массива с наименьшей суммой элементов");
 Console.WriteLine();
 Console.WriteLine("Задайте размер массива");
 Console.WriteLine();
@@ -77,6 +85,5 @@ int row = getNumber("Введите количество строк");
 int coll = getNumber("Введите количество колонок");
 int [,] matrix = initMatrix(row, coll);
 printArray(matrix);
-int [,] newMatrix = sortRow(matrix);
 Console.WriteLine();
-printArray(newMatrix);
+minSumRow(matrix);
